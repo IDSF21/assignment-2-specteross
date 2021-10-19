@@ -4,13 +4,13 @@ A city's road transport system and traffic law enforcement are important aspects
 With this idea in mind, this interactive application allows its user to answer when and where do traffic accidents occur most frequently in the city of New York. And when they do occur, what are the top contributing factors behind the accidents. The time series and geospatial visualizations in this application present results that line up with intuition on where and when accidents would be expected to happen, which suggests that the quality of the dataset has merit and is good enough to study for the scope of this project.
 
 ## 1.1 Disclaimer: 
-The application is based on vehicular collision data claimed to be reported by the New York City Police Department, made available publicly on Kaggle [1](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents). I, as the author of this application, do not take guarantees for its authenticity and completeness, as that is out of scope for this project. I have only studied the dataset and built interactive visualizations on top of it assuming underlying accuracy and completeness.
+The application is based on vehicular collision data claimed to be reported by the New York City Police Department, made available publicly on Kaggle [\[1\]](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents). I, as the author of this application, do not take guarantees for its authenticity and completeness, as that is out of scope for this project. I have only studied the dataset and built interactive visualizations on top of it assuming underlying accuracy and completeness.
 
 # 2 Design Choices
 ## 2.1 Dataset Selection Process
 I chose this dataset on accidents in New York City because:
-1. It contained both timestamps for time series analysis and longitudes & latitudes for geospatial analsysis.
-2. I like driving and road transport systems, and was thus immediately interested in exploring this dataset of driving patterns in the city of New York after seeing it posted on Kaggle.
+- It contained both timestamps for time series analysis and longitudes & latitudes for geospatial analsysis.
+- I like driving and road transport systems, and was thus immediately interested in exploring this dataset of driving patterns in the city of New York after seeing it posted on Kaggle.
 
 I looked at multiple other datasets as well, like Carbon Emmissions, Power Plant Energy Generation, and Covid Vaccinations, but these either didn't have both time series and location coordinate columns in the same data while I was interested in creating both visualizations, or they felt they were often studied well, both historically and in terms on other students in this class taking them up.
 
@@ -33,15 +33,15 @@ For answering questions on the top contributing factors behind these vehicular c
 
 ## 2.3 Other Visual Encodings Considered
 I also considered the following visual encodings: 
-1. Using a heatmap in Part 1 for showing accidents by hour of day on one axis and crash date on the other axis, but didn't use this as variations in frequency of hour of day by date or by month is not that high. Accidents commonly occur during high traffic times like 2-5pm and not as much in the wee hours of the night like 2-5am. Thus, a time series line chart that allows viewing the data by any of date, day of week, or hour of day (as per user's choice) felt more useful.
-2. Using grouped bar charts instead of stacked bar charts in Part 2 for showing accidents. However, I decided stacked bar charts are more useful as I am comparing absolute numbers not percentages of different categories. For instance, in a grouped bar chart, Fatal accidents will always be a meek small bar on the side of all accidents, and it makes more sense to show them as "a part" of all accidents rather than comparing them.
-3. Using pie charts to display percentages of accidents of various types, which I didn't include as I made three other visualizations and didn't want to make the application too complex.
+- Using a heatmap in Part 1 for showing accidents by hour of day on one axis and crash date on the other axis, but didn't use this as variations in frequency of hour of day by date or by month is not that high. Accidents commonly occur during high traffic times like 2-5pm and not as much in the wee hours of the night like 2-5am. Thus, a time series line chart that allows viewing the data by any of date, day of week, or hour of day (as per user's choice) felt more useful.
+- Using grouped bar charts instead of stacked bar charts in Part 2 for showing accidents. However, I decided stacked bar charts are more useful as I am comparing absolute numbers not percentages of different categories. For instance, in a grouped bar chart, Fatal accidents will always be a meek small bar on the side of all accidents, and it makes more sense to show them as "a part" of all accidents rather than comparing them.
+- Using pie charts to display percentages of accidents of various types, which I didn't include as I made three other visualizations and didn't want to make the application too complex.
 
 ## 2.4 Data Availability
 I read in one of our IDS required readings that good data science application should allow useres to export the underlying data for their own further analysis. Thus, I  worked on adding an Export to Excel functionality that lazily exports the data when a user clicks on export, as per user selected filters on the sidebar. The process does not happen at startup and does not affect application load time.
 
 # 3 Development Process
-This was a solo project.
+This was a **solo project**.
 
 I spent about 15 hours in total on this homoework.
 - ~2 hours on browsing different datasets on Kaggle and data.gov and selecting this dataset
@@ -54,7 +54,7 @@ I spent about 15 hours in total on this homoework.
 
 
 # 4 Citations 
-1. The dataset was taken from [this page](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents) on Kaggle.
-2. I used this [streamlit cheatsheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py) and Streamlit API docs to learn and code up this application 
-3. [This demo app](https://github.com/streamlit/demo-uber-nyc-pickups/blob/master/streamlit_app.py) helped me understand how to build the map view in Part 2, and I took snippets of code from it (present in map_helper.py)
-4. [This thread](https://discuss.streamlit.io/t/how-to-add-a-download-excel-csv-function-to-a-button/4474/16) was useful in adding the Export to Excel functionality in Part 4 
+\[1\] The dataset was taken from [this page](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents) on Kaggle.
+\[2\] I used this [streamlit cheatsheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py) and Streamlit API docs to learn and code up this application 
+\[3\] [This demo app](https://github.com/streamlit/demo-uber-nyc-pickups/blob/master/streamlit_app.py) helped me understand how to build the map view in Part 2, and I took snippets of code from it (present in map_helper.py)
+\[4\] [This thread](https://discuss.streamlit.io/t/how-to-add-a-download-excel-csv-function-to-a-button/4474/16) was useful in adding the Export to Excel functionality in Part 4 
