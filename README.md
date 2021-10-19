@@ -57,4 +57,4 @@ I spent about 15 hours in total on this homoework.
 \[1\] The dataset was taken from [this page](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents) on Kaggle.\
 \[2\] I used this [streamlit cheatsheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py) and Streamlit API docs to learn and code up this application.\
 \[3\] [This demo app](https://github.com/streamlit/demo-uber-nyc-pickups/blob/master/streamlit_app.py) helped me understand how to build the map view in Part 2, and I took snippets of code from it (present in map_helper.py).\
-\[4\] [This thread](https://discuss.streamlit.io/t/how-to-add-a-download-excel-csv-function-to-a-button/4474/16) was useful in adding the Export to Excel functionality in Part 4.\
+\[4\] [This thread](https://discuss.streamlit.io/t/how-to-add-a-download-excel-csv-function-to-a-button/4474/16) was useful in adding the Export to Excel functionality in Part 4.
