@@ -41,7 +41,7 @@ I also considered the following visual encodings:
 - Using pie charts to display percentages of accidents of various types, which I didn't include as I made three other visualizations and didn't want to make the application too complex.
 
 ## 2.4 Data Export
-I read in one of our IDS required readings (Sharing Data in Process & Provenance section of Week 5 Visualization Reading) that good data science application should allow useres to export the underlying data for their own further analysis. Hence, I  worked on adding an Export to Excel functionality that lazily exports the data when a user clicks on export, as per user selected filters on the sidebar. The process does not happen at startup and does not affect application load time.
+I read in one of our IDS required readings\[5\] (Sharing Data in Process & Provenance section of Week 5 Visualization Reading) that good data science application should allow useres to export the underlying data for their own further analysis. Hence, I  worked on adding an Export to Excel functionality that lazily exports the data when a user clicks on export, as per user selected filters on the sidebar. The process does not happen at startup and does not affect application load time.
 
 # 3 Development Process
 This was a **solo project**.
@@ -63,7 +63,7 @@ I spent ~18 hours in total on this homework.
 Overall, I really liked the experience of this homework and I think Streamlit is an awesome library. I am surprised I didn't know about it before, that I could create a such an interactive web application this easily with just Python code. :)
 
 ## 3.1 Disclaimer: 
-The application is based on vehicular collision data claimed to be reported by the New York City Police Department, made available publicly on Kaggle [\[1\]](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents). I, as the author of this web application, do not take guarantees for its authenticity and completeness, as that is out of scope for this project. I have studied the dataset for patterns and buiding interactive visualizations on top of it, but underlying accuracy and completeness has been assumed. That said, the insights drawn from the presented visualizations do line up with intuition on when and where accidents would be expected to happen based on factors like rush hours, busy streets, etc. which suggests that the quality of the dataset has merit and is good enough to study for the scope of this project.
+The application is based on vehicular collision data claimed to be reported by the New York City Police Department, made available publicly on Kaggle \[1\]. I, as the author of this web application, do not take guarantees for its authenticity and completeness, as that is out of scope for this project. I have studied the dataset for patterns and buiding interactive visualizations on top of it, but underlying accuracy and completeness has been assumed. That said, the insights drawn from the presented visualizations do line up with intuition on when and where accidents would be expected to happen based on factors like rush hours, busy streets, etc. which suggests that the quality of the dataset has merit and is good enough to study for the scope of this project.
 
 ## 3.2 Limitations: 
 The dataset is limited to the date range of January 2020 through August 2020, as that is the full dataset found on Kaggle for this task, however, the presented visualizations do showcase a proof of concept for a longer horizon and more complete dataset.
