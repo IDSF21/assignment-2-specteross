@@ -58,6 +58,23 @@ def load_and_clean_data():
     accidents_df[SEVERITY] = accidents_df.apply(lambda x: severity_level(x), axis=1)
     return accidents_df
 
+def px_line_with_weekday_sort_fix(time_series_df, days_of_week, y_attr, color=None):
+    time_series_df["Day of Week"] = time_series_df[DAY_OF_WEEK].apply(lambda x: WEEKDAY_SORT_KEY[x])
+    time_series_df = time_series_df.sort_values(["Day of Week"])
+    if color is not None: 
+        fig = px.line(time_series_df, x="Day of Week", y=y_attr, color=color)
+    else: 
+        fig = px.line(time_series_df, x="Day of Week", y=y_attr)
+    fig.update_layout(
+        xaxis = dict(
+            tickmode = 'array',
+            tickvals = [WEEKDAY_SORT_KEY[i] for i in days_of_week],
+            ticktext = days_of_week, 
+            title = DAY_OF_WEEK
+        )
+    )
+    return fig
+
 with st.spinner():
     accidents_df = load_and_clean_data()
 
@@ -108,7 +125,7 @@ if len(selected_days_of_week):
     filtered_df = filtered_df[filtered_df[DAY_OF_WEEK].isin(selected_days_of_week)]
 filtered_df = filtered_df[(filtered_df[HOUR_OF_DAY] >= start_hour) & (filtered_df[HOUR_OF_DAY] <= end_hour)]
 st.markdown("---")
-st.write("For your selected filters (see sidebar):")
+st.markdown("#### Overview of metrics for your selected filters (on the sidebar):")
 col1, col2, col3 = st.columns((1, 1, 1))
 with col1: 
     st.metric("Total Vehicular Collisions", f"{len(filtered_df):,}")
@@ -152,7 +169,7 @@ with col3:
     if len(areas) == 1:  # No use of categorizing by area if user has selected a single area in the common filters
         legend_entries = [SEVERITY, "No Legend"]
     if len(selected_severities) == 1:  # No use of categorizing by severity if user has selected a single severity in the common filters
-        legend_entries = ["No Legend", "Area"]
+        legend_entries = ["Area", "No Legend"]
     color = st.selectbox("Select legend: ", legend_entries)
     if color == "Area":
         color = BOROUGH
@@ -161,18 +178,16 @@ if color != "No Legend":
     time_series_df = filtered_df[[x_attr, y_attr, color]]
     time_series_df = time_series_df.groupby([x_attr, color]).sum().reset_index()
     if x_attr == DAY_OF_WEEK:
-        time_series_df[DAY_OF_WEEK + "SORT_HELPER"] = time_series_df[DAY_OF_WEEK].apply(lambda x: WEEKDAY_SORT_KEY[x])
-        time_series_df = time_series_df.sort_values([DAY_OF_WEEK + "SORT_HELPER"])
-        st.plotly_chart(px.line(time_series_df, x=x_attr, y=y_attr, color=color))
+        fig = px_line_with_weekday_sort_fix(time_series_df, days_of_week, y_attr, color=color)
+        st.plotly_chart(fig)
     else: 
         st.plotly_chart(px.line(time_series_df, x=x_attr, y=y_attr, color=color))
 else: 
     time_series_df = filtered_df[[x_attr, y_attr]]
     time_series_df = time_series_df.groupby([x_attr]).sum().reset_index()
     if x_attr == DAY_OF_WEEK:
-        time_series_df[DAY_OF_WEEK + "SORT_HELPER"] = time_series_df[DAY_OF_WEEK].apply(lambda x: WEEKDAY_SORT_KEY[x])
-        time_series_df = time_series_df.sort_values([DAY_OF_WEEK + "SORT_HELPER"])
-        st.plotly_chart(px.line(time_series_df, x=x_attr, y=y_attr))
+        fig = px_line_with_weekday_sort_fix(time_series_df, days_of_week, y_attr)
+        st.plotly_chart(fig)
     else: 
         st.plotly_chart(px.line(time_series_df, x=x_attr, y=y_attr))
 
@@ -180,18 +195,18 @@ st.markdown("""
     #### Insights on Patterns
     The above chart answers the 'when' question in multiple ways. For instance: 
     
-    1. If you select `Crash Date` or `Month` on the x-axis, we see that most accidents occur in the months of January through March, 
+    1. If you select `Crash Date` or `Month` on the x-axis, we see that most accidents occurred in the months of January through March, 
     which can perhaps be attributed to slippery winter roads. There is a sharp dip in the numbers in the summer months of April and May, 
     while a slight increase is seen in the higher rainfall months of June though August.
 
     2. Interestingly, the average `Number of Persons Injured` (select it on y-axis) is about the same in autumn months vs winter months , 
-    even though almost double the accidents happen per day in windter months on average. 
+    even though total accidents per day in winter months are almost double of autumn months on average (select `Number of Accidents` on the y-axis). 
     This can perhaps be attributed to lesser pedestrians and cyclists on the road in winter months.
     
     3. Pivoting the chart by `Day Of Week` shows that most accidents occur on Fridays, perhaps attributable to higher traffic and pedestrians 
-    on the road coming out for parties and perhaps driving after a few drinks.
+    coming out on the road for meetups, parties, or weekend travel.
 
-    4. Finally, selecting `Hour of Day` on x-axis shows us that most accidents occur in the afternoon, between 2-4pm. This insight can be used to enforce
+    4. Finally, selecting `Hour of Day` on x-axis shows us that most accidents occur during late afternoon, between 2-6pm. This insight can be used to enforce
     stricter traffic police patroling or speedblocks during these rush hours.
     ---
 """)
@@ -229,8 +244,8 @@ with col2:
     st.header("Top Contributing Factors")
 st.markdown("""
     ### _What_ are the top reasons vehicular collisions happen? 
-    Next, let's examine the top 10 contributing factors behind vehicular collisions in NYC. This can help answer why accidents commonly occur. 
-    You can double-click on the categories in the legend to isolate to accidents of that type. \n
+    Next, let's examine the top 10 contributing factors behind vehicular collisions in NYC. \n
+    You can double-click on the categories in the legend to isolate to accidents of that type.
     And as before, you can use the sidebar on the left to select filters that apply to all parts 1 through 4. \n
 """)
 
@@ -260,9 +275,9 @@ top_contributing_factors_df = contributing_factors_df_with_severity[
 st.plotly_chart(px.bar(top_contributing_factors_df, x=x_attr, y=y_attr, color=color))
 st.markdown("""
     #### Insights from Contributing Factors: 
-    1. We see from the above chart that `Driver Inattention` comes out on top, followed by 
+    1. We see from the above chart that `Driver Inattention` comes out on top by a large margin. It is followed by 
     `Failure to Yield Right of Way` for all areas except Manhattan. 
-    2. Furthermore, isolating to Manhattan shows that it is the only area where `Following Too Closely` 
+    2. Isolating to Manhattan shows that it is the only area where `Following Too Closely` 
     is the second highest contributing factor. This makes intuitive sense because of a denser workforce 
     population and a higher number of pedestrians walking to office.
     3. Finally, deselecting the "Filter out Unspecified Contributing Factors" checkbox, we see that 
