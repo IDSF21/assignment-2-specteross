@@ -41,7 +41,7 @@ I also considered the following visual encodings:
 - Using pie charts to display percentages of accidents of various types, which I didn't include as I made three other visualizations and didn't want to make the application too complex.
 
 ## 2.4 Data Export
-I read in one of our IDS required readings\[5\] (Sharing Data in Process & Provenance section of Week 5 Visualization Reading) that good data science application should allow useres to export the underlying data for their own further analysis. Hence, I  worked on adding an Export to Excel functionality that lazily exports the data when a user clicks on export, as per user selected filters on the sidebar. The process does not happen at startup and does not affect application load time.
+I read in one of our IDS required readings (Sharing Data in Process & Provenance section of Week 5 Visualization Reading \[5\]) that a good data science application should allow useres to export the underlying data for their own further analysis. Hence, I  worked on adding an Export to Excel functionality that lazily exports the data when a user clicks on export, as per user selected filters on the sidebar. The process does not happen at startup and does not affect application load time.
 
 # 3 Development Process
 This was a **solo project**.
