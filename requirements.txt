@@ -3,3 +3,4 @@ pandas
 plotly
 pydeck
 streamlit
+xlsxwriter
