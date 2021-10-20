@@ -60,7 +60,7 @@ I spent ~18 hours in total on this homework.
 - ~1 hour on figuring out how to deploy the application on a public URL
 - ~1 hour on giving finishing touches and writing up this README.md
 
-Overall, I really liked the experience of this homework and I think Streamlit is an awesome library. I am surprised I didn't know about it before - I could create a web appplication this easily with just Python code. :)
+Overall, I really liked the experience of this homework and I think Streamlit is an awesome library. I am surprised I didn't know about it before, that I could create a such an interactive web application this easily with just Python code. :)
 
 ## 3.1 Disclaimer: 
 The application is based on vehicular collision data claimed to be reported by the New York City Police Department, made available publicly on Kaggle [\[1\]](https://www.kaggle.com/mysarahmadbhat/nyc-traffic-accidents). I, as the author of this web application, do not take guarantees for its authenticity and completeness, as that is out of scope for this project. I have studied the dataset for patterns and buiding interactive visualizations on top of it, but underlying accuracy and completeness has been assumed. That said, the insights drawn from the presented visualizations do line up with intuition on when and where accidents would be expected to happen based on factors like rush hours, busy streets, etc. which suggests that the quality of the dataset has merit and is good enough to study for the scope of this project.
